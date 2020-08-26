@@ -38,8 +38,8 @@ def signup(request):
                     else:
                         if request.POST['password1']==request.POST['password2']:
                             password = request.POST['password1']
-                            regex_password="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$"
-                            if (re.search(regex_password,password) ==None):
+                            regex_password="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,32}$"
+                            if (re.search(regex_password,password) == None):
                                 messages.info(request,"Enter strong  password ")
                                 return render(request,'app2/signup.html')
                             else:       
@@ -49,7 +49,6 @@ def signup(request):
                                     profile.save()
                                     user = auth.authenticate(username=username,password=password)
                                     login(request,user)
-                                    messages.info(request,'user created!')
                                     return redirect('success')
                                 except:
                                     messages.info(request,'User already exist')
