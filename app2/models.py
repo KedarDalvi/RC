@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class details(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    phone_no=models.IntegerField()
+    ph_no=models.IntegerField()
     year=models.CharField(max_length=10)
     score=models.IntegerField(default=0)
 

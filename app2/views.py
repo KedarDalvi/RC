@@ -40,12 +40,12 @@ def signup(request):
                             password = request.POST['password1']
                             regex_password="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]).{8,32}$"
                             if (re.search(regex_password,password) ==None):
-                                messages.info(request,"Enter password in correct pattern")
+                                messages.info(request,"Enter strong  password ")
                                 return render(request,'app2/signup.html')
                             else:       
                                 try:
                                     user=User.objects.create_user(username=username,first_name=f_name,last_name=l_name,email=email,password=password)
-                                    profile=details(user=user,phone_no=ph_no)
+                                    profile=details(user=user,ph_no=ph_no)
                                     profile.save()
                                     user = auth.authenticate(username=username,password=password)
                                     login(request,user)
