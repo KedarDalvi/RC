@@ -32,7 +32,7 @@ def signup(request):
                     return render(request,'app2/signup.html')
                 else:
                     ph_no=request.POST['mob']
-                    if ((ph_no.isdigit()==False) or (len(str(ph_no))!=10) or ((str(ph_no)[0] in [0,1,2,3,4,5])==True)):
+                    if ((ph_no.isdigit()==False) or (len(str(ph_no))!=10) or ((str(ph_no)[0] in ['0','1','2','3','4','5'])==True)):
                         messages.info(request,'Enter a valid phone number')
                         return render(request,'app2/signup.html')
                     else:
