@@ -1,0 +1,49 @@
+
+{% extends 'app2/coding.html' %}
+{% block content %}
+	
+<h1>Sign-Up!</h1>
+<form method="POST" >
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td>Username:-</td>
+			<td><input type='text' name='username' required></td>
+		</tr>
+		<tr>
+			<td>Email id:-</td>
+			<td><input type='text' name='email' required></td>
+		</tr>
+		<tr>
+			<td>First name:-</td>
+			<td><input type='text' name='fname' required></td>
+		</tr>
+		<tr>
+			<td>Last name:-</td>
+			<td><input type='text' name='lname' required></td>
+		</tr>
+		<tr>
+			<td>Phone number:-</td>
+			<td><input type='text' name='mob' required></td>
+		</tr>
+		<tr>
+			<td>Password:-</td>
+			<td><input type='password' name='password1' required></td>
+		</tr>
+		<tr>
+			<td>Confirm password:-</td>
+			<td><input type='password' name='password2' required></td>
+		</tr>
+	</table>
+		<p>Note password should contain:</p>
+		<div>1. At least one digit [0-9]</div>	
+		<div>2. At least one lowercase character [a-z]</div>	
+		<div>3. At least one uppercase character [A-Z]</div>
+
+		<div>4. At least one special character [*.!@#$%^&(){}[]:;<>,.?/~_+-=|\]</div>
+		<div>5. At least 8 characters in length, but no more than 32.</div>	
+	<p></p><input type='submit' name='Submit'></p>
+</form>
+<br><br>
+<div><a href="{% url 'signin' %}"></a></div>
+{% endblock %}

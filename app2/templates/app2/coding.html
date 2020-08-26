@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Coding</title>
+    {% if messages %}
+        {% for message in messages %}
+        <h3>{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
+</head>
+<body bgcolor='cyan'>
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
