@@ -5,6 +5,7 @@
 <h1>Sign-Up!</h1>
 <form method="POST" >
 	{% csrf_token %}
+	<fieldset>
 	<table>
 		<tr>
 			<td>Username:-</td>
@@ -35,6 +36,7 @@
 			<td><input type='password' name='password2' required></td>
 		</tr>
 	</table>
+</fieldset>
 		<p>Note password should contain:</p>
 		<div>1. At least one digit [0-9]</div>	
 		<div>2. At least one lowercase character [a-z]</div>	
@@ -44,6 +46,5 @@
 		<div>5. At least 8 characters in length, but no more than 32.</div>	
 	<p></p><input type='submit' name='Submit'></p>
 </form>
-<br><br>
-<div><a href="{% url 'signin' %}"></a></div>
+<div><a href="{% url 'signin' %}">ALready have an account?Signin here</a></div>
 {% endblock %}

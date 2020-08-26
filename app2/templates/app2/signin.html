@@ -4,6 +4,7 @@
 <h1>SignIn!</h1>
 <form method="POST" >
 	{% csrf_token %}
+	<fieldset>
 	<table>
 		<tr>
 			<td>Username:-</td>
@@ -13,9 +14,9 @@
 			<td>Password:-</td>
 			<td><input type='password' name='password' required></td>
 		</tr>
-    </table>
+	</table>
+</fieldset>
     <p></p><input type='submit' name='Submit'></p>
 </form>
-<br><br>
-<div><a href="{% url 'signup' %}"></a></div>
+<div><a href="{% url 'signup' %}">Don't have an account?Signup here</a></div>
 {% endblock %}
