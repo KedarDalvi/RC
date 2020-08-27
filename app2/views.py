@@ -11,7 +11,7 @@ from django.http import HttpResponse
 def signup(request):
     if request.method=="POST":
         username=request.POST['username']
-        regex1='^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)$'
+        regex1='^(?=.{6,32}$)(?![.])(?!.*[.]{2})[a-zA-Z0-9.]+(?<![.])$'
         if (re.search(regex1,username)== None ):
             messages.info(request,'Enter the valid username!')
             return render(request,'app2/signup.html')

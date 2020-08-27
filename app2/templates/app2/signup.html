@@ -3,6 +3,7 @@
 {% block content %}
 	
 <h1>Sign-Up!</h1>
+
 <form method="POST" >
 	{% csrf_token %}
 	<fieldset>
@@ -37,13 +38,15 @@
 		</tr>
 	</table>
 </fieldset>
-		<p>password should contain:</p>
-		<div>1. At least one digit [0-9]</div>	
-		<div>2. At least one lowercase character [a-z]</div>	
-		<div>3. At least one uppercase character [A-Z]</div>
-
-		<div>4. At least one special character [*.!@#$%^&(){}[]:;<>,.?/~_+-=|\]</div>
-		<div>5. At least 8 characters in length, but no more than 32.</div>	
+		<p>Instructions while Signup:</p>
+		<div>1. Username should be in 6-32 characters</div>
+		<div>2. Username should not end with _, -, .  </div>
+		<div>3. Username should not contain consecutive _ ,- , .  </div>
+		<div>4. Password should contain at least one digit [0-9]</div>	
+		<div>5. Password should contain a least one lowercase character [a-z]</div>	
+		<div>6. Password should contain a least one uppercase character [A-Z]</div>
+		<div>7. Password should contain a least one special character [*.!@#$%^&(){}[]:;<>,.?/~_+-=|\]</div>
+		<div>8. Password should contain a least 8 characters in length, but no more than 32.</div>	
 	<p></p><input type='submit' name='Submit'></p>
 </form>
 <div><a href="{% url 'signin' %}">ALready have an account?Signin here</a></div>
