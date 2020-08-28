@@ -23,23 +23,18 @@ def signup(request):
         if (re.search(username_regex,username)== None ):
             messages.info(request,'Enter the valid username!')
             mistake=1
-            #return render(request,'app2/signup.html')
         if f_name.isalpha()==False:
             messages.info(request,"Enter the correct First name!")
             mistake=1
-            #return render(request,'app2/signup.html')
         if l_name.isalpha()==False:
             messages.info(request,"Enter the correct Last name!")
             mistake=1
-            #return render(request,'app2/signup.html')
         if (re.search(email_regex,email) ==None):
             messages.info(request,"Enter a valid email address")
             mistake=1
-            #return render(request,'app2/signup.html')
         if ((ph_no.isdigit()==False) or (len(str(ph_no))!=10) or ((str(ph_no)[0] in ['0','1','2','3','4','5'])==True)):
             messages.info(request,'Enter a valid phone number')
             mistake=1
-            #return render(request,'app2/signup.html')
         if mistake==1:
             return render(request,'app2/signup.html')        
         else:
