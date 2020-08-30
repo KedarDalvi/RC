@@ -10,52 +10,46 @@ from django.http import HttpResponse
 
 def signup(request):
     if request.method=="POST":
-        username=request.POST['username']
-        regex1='^(?=.{6,32}$)(?![.])(?!.*[.]{2})[a-zA-Z0-9.]+(?<![.])$'
-        if (re.search(regex1,username)== None ):
+        username_regex='^(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$'
+        email_regex='^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+        mistake=0
+        data=request.POST
+        username=data['username']
+        f_name=data['fname']
+        l_name=data['lname']
+        email=data['email']
+        ph_no=data['mob']
+        password = data['password1']
+        if (re.search(username_regex,username)== None ):
             messages.info(request,'Enter the valid username!')
-            return render(request,'app2/signup.html')
+            mistake=1
+        if f_name.isalpha()==False:
+            messages.info(request,"Enter the correct First name!")
+            mistake=1
+        if l_name.isalpha()==False:
+            messages.info(request,"Enter the correct Last name!")
+            mistake=1
+        if (re.search(email_regex,email) ==None):
+            messages.info(request,"Enter a valid email address")
+            mistake=1
+        if ((ph_no.isdigit()==False) or (len(str(ph_no))!=10) or ((str(ph_no)[0] in ['0','1','2','3','4','5'])==True)):
+            messages.info(request,'Enter a valid phone number')
+            mistake=1
+        if mistake==1:
+            return render(request,'app2/signup.html')        
         else:
-            f_name=request.POST['fname']
-            l_name=request.POST['lname']
-            if f_name.isalpha()==False:
-                messages.info(request,"Enter the correct First name!")
-                return render(request,'app2/signup.html')
-            elif l_name.isalpha()==False:
-                messages.info(request,"Enter the correct Last name!")
-                return render(request,'app2/signup.html')
-            else:
-                email=request.POST['email']
-                regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-                if (re.search(regex,email) ==None):
-                    messages.info(request,"Enter a valid email address")
+            if data['password1']==data['password2']:
+                try:
+                    user=User.objects.create_user(username=username,first_name=f_name,last_name=l_name,email=email,password=password)
+                    profile=details(user=user,ph_no=ph_no)
+                    profile.save()
+                    messages.info(request,'User Registered successfully!')
                     return render(request,'app2/signup.html')
-                else:
-                    ph_no=request.POST['mob']
-                    if ((ph_no.isdigit()==False) or (len(str(ph_no))!=10) or ((str(ph_no)[0] in ['0','1','2','3','4','5'])==True)):
-                        messages.info(request,'Enter a valid phone number')
-                        return render(request,'app2/signup.html')
-                    else:
-                        if request.POST['password1']==request.POST['password2']:
-                            password = request.POST['password1']
-                            regex_password="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,32}$"
-                            if (re.search(regex_password,password) == None):
-                                messages.info(request,"Enter strong  password ")
-                                return render(request,'app2/signup.html')
-                            else:       
-                                try:
-                                    user=User.objects.create_user(username=username,first_name=f_name,last_name=l_name,email=email,password=password)
-                                    profile=details(user=user,ph_no=ph_no)
-                                    profile.save()
-                                    user = auth.authenticate(username=username,password=password)
-                                    login(request,user)
-                                    return redirect('success')
-                                except:
-                                    messages.info(request,'User already exist')
-                                    return render(request,'app2/signup.html',)
-                        else:
-                            messages.info(request, 'Passwords do not match :)')
-                            return render(request,'app2/signup.html',)
+                except:
+                    messages.info(request,'User already exist')
+                    return render(request,'app2/signup.html')
+            messages.info(request, 'Passwords do not match ')
+            return render(request,'app2/signup.html')       
     if request.method=="GET":
         return render(request,'app2/signup.html')
 
@@ -66,7 +60,7 @@ def signin(request):
         user = auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            return redirect('success')
+            return render(request,'app2/success.html',{'user':user})
         else:
             messages.info(request,'Invalid Credentials')
             return render(request,'app2/signin.html',)
