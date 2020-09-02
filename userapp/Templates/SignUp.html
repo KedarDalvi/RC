@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignUp Page</title>
+    <h1>SignUp Page</h1>
+    {% if message %}
+    <h1>{{ message }}</h1>
+    {% endif %}
+    <fieldset>
+        <form method = 'POST' action = '{% url "signup" %}'>
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Username :</td>
+                    <td><input type = 'text' name = 'username' required></td>
+                </tr>
+                <tr>
+                    <td>First Name :</td>
+                    <td><input type = 'text' name = 'first_name'></td>
+                </tr>
+                <tr>
+                <td>Last Name :</td>
+                    <td><input type = 'text' name = 'last_name'></td>
+                </tr>
+                <tr>
+                    <td>Email :</td>
+                    <td><input type = 'email' name = 'email'></td>
+                </tr>
+                <tr>
+                    <td>Phone :</td>
+                    <td><input type = 'number' name = 'phone'></td>
+                </tr>
+                <tr>
+                    <td>Password :</td>
+                    <td><input type = 'password' name = 'f_pass'></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password :</td>
+                    <td><input type = 'password' name = 'c_pass'></td>
+                </tr>
+            </table>
+            <input type = 'submit' value = 'Submit' name = 'Submit'>
+        </form>
+    </fieldset>
+    <a href = '{% url "signin" %}'>Already a member? SignIn Here</a><br><br>
+</head>
+1. Length of the Username must be 6-32 characters.<br>
+2. Username can contain _ , - , . <br>
+3. Username must not start or end with _ , - , . <br>
+4. Username cannot contain consecutive _ , - , . <br>
+<body>
+
+</body>
+</html>

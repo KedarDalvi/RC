@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<h1>Home Page</h1>
+<fieldset>
+{% if message %}
+<h1>{{ message }} logged in successfully.</h1>
+{% endif %}
+<a href = '{% url "quiz" %}'>Start the quiz here.</a><br><br>
+<form method = 'POST' action = '{% url "logout" %}'>
+    {% csrf_token %}
+    <input type = 'submit' value = 'Logout' name = 'logout'>
+</form>
+</fieldset>
+</body>
+</html>

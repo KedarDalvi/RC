@@ -6,6 +6,7 @@ from django.core.validators import validate_email
 from django.contrib.auth import login ,logout ,authenticate
 import re
 from django.http import HttpResponse
+from .models import Question
 
 
 def signup(request):
@@ -68,15 +69,13 @@ def signin(request):
         return render(request,'app2/signin.html',)
 
 def success(request):
-    data=details.objects.get(user=request.user)
-    return render(request,'app2/success.html',{'data':data})
-
+    context={}
+    context['questions']=Question.objects.all()
+    return render(request,'app2/success.html',context)
 
 def logout(request):
+    
     auth.logout(request)
     messages.info(request,'Successfully logged out!')
     return render(request,'app2/signin.html')
-
-
-
 

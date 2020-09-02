@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SignIn Page</title>
+</head>
+<body>
+<h1>SignIn Page</h1>
+{% if message %}
+<h1>{{ message }}</h1>
+{% endif %}
+{% if score %}
+<h1>Your final score is {{ score }}</h1>
+{% endif %}
+<fieldset>
+    <form method = 'POST' action = '{% url "signin" %}'>
+        {% csrf_token %}
+        Username : <input type = 'text' name = 'username' required><br><br>
+        Password : <input type = 'password' name = 'password'><br><br>
+        <input type = 'submit' name = 'Submit' value = 'Submit'>
+    </form>
+</fieldset>
+<a href = '{% url "signup" %}'>SignUp Here</a>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+<fieldset>
+{% if question %}
+<h1>{{ sr }}. {{ question.question }}</h1><br>
+{% endif %}
+<form method = 'post' action = '{% url "quiz" %}'>
+    {% csrf_token %}
+    Attempt 1: <input type = 'number' name = 'attempt1' required><br><br>
+    Attempt 2: <input type = 'number' name = 'attempt2' required ><br><br>
+    <input type = 'submit' value = 'Submit' name = 'submit'><br><br>
+</form>
+</fieldset>
+<h1>Your current score is {{ score }}.</h1>
+<form method = 'post' action = '{% url "logout" %}'>
+    {% csrf_token %}
+    <input type = 'submit' value = 'Logout' name = 'submit'>
+</form>
+</body>
+</html>
